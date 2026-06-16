@@ -238,6 +238,13 @@ a {
   margin-bottom: 16px;
 }
 
+.logo {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
 .icon-brand {
   color: var(--color-primary);
   width: 28px;
