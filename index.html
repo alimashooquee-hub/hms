@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="A premium and state-of-the-art Medical Records Management System for hospitals and clinical doctors.">
+  <title>MediFlow | Clinical Records & Patient Management</title>
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <!-- Main Stylesheet -->
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- Dynamic Notifications/Toast System -->
+  <div id="toast-container" class="toast-container"></div>
+
+  <!-- ================= AUTH VIEW ================= -->
+  <main id="auth-view" class="auth-view-container active">
+    <div class="auth-card">
+      <div class="auth-header">
+        <div class="brand-logo">
+          <i data-lucide="activity" class="icon-brand"></i>
+          <span>MediFlow</span>
+        </div>
+        <h1>Welcome Back</h1>
+        <p>Enter clinical credentials to access the terminal</p>
+      </div>
+
+      <form id="login-form" class="auth-form" novalidate>
+        <div class="input-group">
+          <label for="login-username">Username / Staff ID</label>
+          <div class="input-wrapper">
+            <i data-lucide="user" class="input-icon"></i>
+            <input type="text" id="login-username" placeholder="e.g. admin" required autocomplete="username">
+          </div>
+          <span class="error-msg" id="username-error">Username is required</span>
+        </div>
+
+        <div class="input-group">
+          <label for="login-password">Security Password</label>
+          <div class="input-wrapper">
+            <i data-lucide="lock" class="input-icon"></i>
+            <input type="password" id="login-password" placeholder="••••••••" required autocomplete="current-password">
+          </div>
+          <span class="error-msg" id="password-error">Password is required</span>
+        </div>
+
+        <button type="submit" id="btn-login" class="btn btn-primary btn-block">
+          <span>Login</span>
+          <i data-lucide="arrow-right"></i>
+        </button>
+      </form>
+      <button type="button" id="btn-show-signup" class="btn btn-outline btn-block" style="margin-top:20px">
+        <span>Create Account</span>
+        <i data-lucide="user-plus"></i>
+      </button>
+
+      <div class="auth-footer">
+        <p>Encrypted end-to-end HIPPA compliance</p>
+        <p class="signup-link"><a href="#" id="link-to-signup">Create an account</a></p>
+      </div>
+    </div>
+  </main>
+
+  <!-- Signup Modal (Authentication) -->
+  <div class="modal-backdrop" id="signup-modal">
+    <div class="modal-container">
+      <div class="modal-header">
+        <div class="modal-title">
+          <i data-lucide="user-plus" class="modal-icon text-primary"></i>
+          <div>
+            <h3>Create Account</h3>
+            <p>Register a new user account</p>
+          </div>
+        </div>
+        <button class="modal-close" id="btn-close-signup-modal">
+          <i data-lucide="x"></i>
+        </button>
+      </div>
+      <form id="signup-auth-form" class="modal-form" novalidate>
+        <div class="modal-body">
+          <div class="form-group">
+            <label for="signup-fullname" class="required">Full Name</label>
+            <input type="text" id="signup-fullname" placeholder="e.g. John Doe" required>
+            <span class="field-error" id="signup-fullname-error">Name is required</span>
+          </div>
+          <div class="form-group">
+            <label for="signup-username" class="required">Username</label>
+            <input type="text" id="signup-username" placeholder="e.g. johndoe" required>
+            <span class="field-error" id="signup-username-error">Username is required</span>
+          </div>
+          <div class="form-group">
+            <label for="signup-email">Email</label>
+            <input type="email" id="signup-email" placeholder="e.g. john@example.com">
+            <span class="field-error" id="signup-email-error">Valid email required</span>
+          </div>
+          <div class="form-group">
+            <label for="signup-dob" class="required">Date of Birth</label>
+            <input type="date" id="signup-dob" required>
+            <span class="field-error" id="signup-dob-error">Date of birth required</span>
+          </div>
+          <div class="form-group">
+            <label for="signup-password" class="required">Password</label>
+            <input type="password" id="signup-password" required>
+            <span class="field-error" id="signup-password-error">Password is required</span>
+          </div>
+          <div class="form-group">
+            <label for="signup-confirm-password" class="required">Confirm Password</label>
+            <input type="password" id="signup-confirm-password" required>
+            <span class="field-error" id="signup-confirm-error">Passwords must match</span>
+          </div>
+          <div class="form-group">
+            <label for="signup-role" class="required">Role</label>
+            <select id="signup-role" required>
+              <option value="">Select Role</option>
+              <option value="Doctor">Doctor</option>
+              <option value="Nurse">Nurse</option>
+              <option value="Receptionist">Receptionist</option>
+              <option value="Admin">Admin</option>
+            </select>
+            <span class="error-msg" id="signup-role-error">Select a role</span>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline" id="btn-cancel-signup">Cancel</button>
+          <button type="submit" class="btn btn-primary"><i data-lucide="check"></i><span>Register</span></button>
+        </div>
+      </form>
+    </div>
+  </div>
+  <p>Already have an account? <a href="#" id="link-to-login">Login here</a></p>
+
+  <!-- ================= MAIN DASHBOARD SHELL ================= -->
+  <div id="app-shell" class="app-shell-container">
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <div class="brand-logo">
+          <i data-lucide="activity" class="icon-brand"></i>
+          <span>MediFlow</span>
+        </div>
+      </div>
+
+      <nav class="sidebar-nav">
+        <a href="#dashboard" class="nav-item active" data-view="dashboard" id="nav-dashboard">
+          <i data-lucide="layout-dashboard"></i>
+          <span>Dashboard</span>
+        </a>
+        <a href="#patients" class="nav-item" data-view="patients" id="nav-patients">
+          <i data-lucide="users"></i>
+          <span>Patient List</span>
+        </a>
+        <a href="#register" class="nav-item" data-view="register" id="nav-register">
+          <i data-lucide="user-plus"></i>
+          <span>Register Patient</span>
+        </a>
+      </nav>
+
+      <div class="sidebar-footer">
+        <div class="user-pill">
+          <div class="user-avatar">DR</div>
+          <div class="user-info">
+            <span class="user-name">Dr. Rajesh Kumar</span>
+            <span class="user-role">Lead Physician</span>
+          </div>
+        </div>
+        <button id="btn-logout" class="btn btn-danger-link btn-block">
+          <i data-lucide="log-out"></i>
+          <span>End Session</span>
+        </button>
+      </div>
+    </aside>
+
+    <!-- Main Workspace Container -->
+    <main class="main-content">
+      <!-- Top Bar Header -->
+      <header class="top-bar">
+        <div class="page-title-container">
+          <h2 id="current-view-title">Clinical Dashboard</h2>
+          <span id="current-view-subtitle">Overview of current operations</span>
+        </div>
+
+        <div class="top-bar-actions">
+          <div class="header-search">
+            <i data-lucide="search" class="search-icon"></i>
+            <input type="text" id="global-search-bar" placeholder="Quick search patient name...">
+          </div>
+          <div class="date-badge">
+            <i data-lucide="calendar"></i>
+            <span id="current-date-display">June 16, 2026</span>
+          </div>
+        </div>
+      </header>
+
+      <!-- View Containers -->
+      <div class="content-viewport">
+        <!-- 1. DASHBOARD VIEW -->
+        <section id="view-dashboard" class="app-view active">
+          <!-- Stats Grid -->
+          <div class="stats-grid">
+            <div class="stat-card">
+              <div class="stat-icon-wrapper p-blue">
+                <i data-lucide="users" class="stat-icon"></i>
+              </div>
+              <div class="stat-details">
+                <h3>Total Patients</h3>
+                <p class="stat-number" id="stat-total-patients">0</p>
+                <span class="stat-trend trend-up"><i data-lucide="trending-up"></i> +12% this week</span>
+              </div>
+            </div>
+
+            <div class="stat-card">
+              <div class="stat-icon-wrapper p-teal">
+                <i data-lucide="file-text" class="stat-icon"></i>
+              </div>
+              <div class="stat-details">
+                <h3>Medical Records</h3>
+                <p class="stat-number" id="stat-total-records">0</p>
+                <span class="stat-trend trend-up"><i data-lucide="trending-up"></i> +5% today</span>
+              </div>
+            </div>
+
+            <div class="stat-card">
+              <div class="stat-icon-wrapper p-purple">
+                <i data-lucide="clock" class="stat-icon"></i>
+              </div>
+              <div class="stat-details">
+                <h3>Visits Today</h3>
+                <p class="stat-number" id="stat-today-visits">0</p>
+                <span class="stat-trend trend-flat">Updated real-time</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Main Grid -->
+          <div class="dashboard-grid">
+            <!-- Recent Activity Panel -->
+            <div class="card panel-card flex-double">
+              <div class="card-header">
+                <div class="card-title-group">
+                  <i data-lucide="clock-3" class="header-icon"></i>
+                  <h4>Recent Log Activity</h4>
+                </div>
+                <span class="badge">Live</span>
+              </div>
+              <div class="card-content">
+                <div class="activity-timeline" id="dashboard-activity-list">
+                  <div class="activity-empty">
+                    <i data-lucide="inbox"></i>
+                    <p>No recent activity logs available.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Quick Action Links Panel -->
+            <div class="card panel-card">
+              <div class="card-header">
+                <div class="card-title-group">
+                  <i data-lucide="zap" class="header-icon"></i>
+                  <h4>Quick Actions</h4>
+                </div>
+              </div>
+              <div class="card-content actions-grid">
+                <button class="quick-action-btn" id="action-quick-register">
+                  <i data-lucide="user-plus" class="action-icon"></i>
+                  <span>Register Patient</span>
+                </button>
+                <button class="quick-action-btn" id="action-quick-search">
+                  <i data-lucide="search" class="action-icon"></i>
+                  <span>Find Patient</span>
+                </button>
+                <button class="quick-action-btn" id="action-quick-stats">
+                  <i data-lucide="bar-chart-2" class="action-icon"></i>
+                  <span>Analytics Reports</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 2. PATIENTS LIST & SEARCH VIEW -->
+        <section id="view-patients" class="app-view">
+          <div class="table-actions-bar">
+            <!-- Search & Filters -->
+            <div class="filter-panel">
+              <div class="search-input-wrapper">
+                <i data-lucide="search" class="search-inner-icon"></i>
+                <input type="text" id="patient-search-input" placeholder="Search by name, ID, or contact number...">
+              </div>
+              <div class="select-wrapper">
+                <select id="filter-blood-group">
+                  <option value="">All Blood Groups</option>
+                  <option value="A+">A+</option>
+                  <option value="A-">A-</option>
+                  <option value="B+">B+</option>
+                  <option value="B-">B-</option>
+                  <option value="O+">O+</option>
+                  <option value="O-">O-</option>
+                  <option value="AB+">AB+</option>
+                  <option value="AB-">AB-</option>
+                </select>
+              </div>
+              <button class="btn btn-primary" id="btn-go-register">
+                <i data-lucide="plus"></i>
+                <span>Register Patient</span>
+              </button>
+            </div>
+
+            <!-- Patients Table -->
+            <div class="card table-card">
+              <div class="table-responsive">
+                <table class="data-table" id="patients-data-table">
+                  <thead>
+                    <tr>
+                      <th>Patient ID</th>
+                      <th>Basic Details</th>
+                      <th>Age / Gender</th>
+                      <th>Contact</th>
+                      <th>Blood Group</th>
+                      <th>Joined Date</th>
+                      <th>Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody id="patients-table-body">
+                    <!-- Dynamically Rendered -->
+                  </tbody>
+                </table>
+              </div>
+              <div class="table-footer" id="table-pagination">
+                <span class="pagination-info" id="pagination-text">Showing 0 of 0 patients</span>
+                <div class="pagination-buttons">
+                  <button class="btn btn-icon" id="btn-prev-page" disabled><i data-lucide="chevron-left"></i></button>
+                  <button class="btn btn-icon" id="btn-next-page" disabled><i data-lucide="chevron-right"></i></button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 3. PATIENT REGISTRATION VIEW -->
+        <section id="view-register" class="app-view">
+          <div class="card form-card">
+            <div class="card-header border-bottom">
+              <div class="card-title-group">
+                <i data-lucide="clipboard-list" class="header-icon font-teal"></i>
+                <h4>Demographics & Primary Registration</h4>
+              </div>
+              <p class="subtitle">Complete the fields below to create a secure clinical profile.</p>
+            </div>
+
+            <form id="patient-registration-form" class="clinical-form" novalidate>
+              <div class="form-grid">
+                <!-- Name -->
+                <div class="form-group col-span-2">
+                  <label for="reg-name" class="required">Full Patient Name</label>
+                  <input type="text" id="reg-name" placeholder="e.g. Rahul Sharma" required>
+                  <span class="field-error" id="reg-name-error">Please enter a valid patient name</span>
+                </div>
+
+                <!-- Date of Birth -->
+                <div class="form-group">
+                  <label for="reg-dob" class="required">Date of Birth</label>
+                  <input type="date" id="reg-dob" required>
+                  <span class="field-error" id="reg-dob-error">Valid DOB is required</span>
+                </div>
+
+                <!-- Gender -->
+                <div class="form-group">
+                  <label for="reg-gender" class="required">Gender Profile</label>
+                  <select id="reg-gender" required>
+                    <option value="">Select Gender</option>
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                    <option value="Other">Other</option>
+                  </select>
+                  <span class="field-error" id="reg-gender-error">Please select a option</span>
+                </div>
+
+                <!-- Contact Phone -->
+                <div class="form-group">
+                  <label for="reg-phone" class="required">Primary Contact Number</label>
+                  <input type="tel" id="reg-phone" placeholder="e.g. 9876543210" required>
+                  <span class="field-error" id="reg-phone-error">Please enter phone (10 digits)</span>
+                </div>
+
+                <!-- Email Address -->
+                <div class="form-group">
+                  <label for="reg-email">Email Address</label>
+                  <input type="email" id="reg-email" placeholder="e.g. patient@gmail.com">
+                  <span class="field-error" id="reg-email-error">Enter a valid email address</span>
+                </div>
+
+                <!-- Blood Group -->
+                <div class="form-group">
+                  <label for="reg-blood" class="required">Blood Group</label>
+                  <select id="reg-blood" required>
+                    <option value="">Select Blood Group</option>
+                    <option value="A+">A+</option>
+                    <option value="A-">A-</option>
+                    <option value="B+">B+</option>
+                    <option value="B-">B-</option>
+                    <option value="O+">O+</option>
+                    <option value="O-">O-</option>
+                    <option value="AB+">AB+</option>
+                    <option value="AB-">AB-</option>
+                  </select>
+                  <span class="field-error" id="reg-blood-error">Blood group is required</span>
+                </div>
+
+                <!-- Emergency Contact Name -->
+                <div class="form-group">
+                  <label for="reg-emergency-name">Emergency Contact (Relation)</label>
+                  <input type="text" id="reg-emergency-name" placeholder="e.g. Priya Sharma (Wife)">
+                </div>
+
+                <!-- Permanent Address -->
+                <div class="form-group col-span-2">
+                  <label for="reg-address">Permanent Address Details</label>
+                  <textarea id="reg-address" rows="2" placeholder="Street Address, Block/Area, City, State"></textarea>
+                </div>
+
+                <!-- Chronic Conditions / History -->
+                <div class="form-group col-span-2">
+                  <label for="reg-history">Primary Medical History / Allergies</label>
+                  <textarea id="reg-history" rows="2" placeholder="e.g. Diabetes Type-2, Penicillin Allergy, None"></textarea>
+                </div>
+              </div>
+
+              <div class="form-actions border-top">
+                <button type="button" class="btn btn-outline" id="btn-cancel-reg">Cancel</button>
+                <button type="submit" class="btn btn-primary">
+                  <i data-lucide="check"></i>
+                  <span>Register Patient</span>
+                </button>
+              </div>
+            </form>
+          </div>
+        </section>
+
+        <!-- 4. MEDICAL RECORDS VIEW -->
+        <section id="view-records" class="app-view">
+          <div class="records-header-details" id="records-patient-banner">
+            <!-- Populated Dynamically -->
+            <div class="patient-details-card glass-card">
+              <div class="patient-card-left">
+                <div class="patient-large-avatar" id="record-avatar">PS</div>
+                <div class="patient-main-info">
+                  <h3 id="record-patient-name">Rahul Sharma</h3>
+                  <span class="pid-tag" id="record-patient-id">PAT-2026-0001</span>
+                </div>
+              </div>
+              <div class="patient-meta-grid">
+                <div><span class="meta-label">Gender / Age</span><strong id="record-patient-age-gender">Male, 28</strong></div>
+                <div><span class="meta-label">Contact</span><strong id="record-patient-contact">9876543210</strong></div>
+                <div><span class="meta-label">Blood Type</span><strong id="record-patient-blood" class="blood-pill">O+</strong></div>
+                <div><span class="meta-label">Allergies/Notes</span><strong id="record-patient-notes">None</strong></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="records-action-timeline-layout">
+            <!-- Records History Timeline -->
+            <div class="timeline-container">
+              <div class="timeline-header">
+                <h5>Clinical Encounter Timeline</h5>
+                <button class="btn btn-primary btn-sm" id="btn-open-record-modal">
+                  <i data-lucide="plus"></i>
+                  <span>Add Encounter Record</span>
+                </button>
+              </div>
+
+              <div class="timeline-stream" id="clinical-records-timeline">
+                <!-- Dynamic Encounters -->
+              </div>
+            </div>
+          </div>
+        </section>
+
+      </div>
+    </main>
+  </div>
+
+  <!-- ================= MODALS ================= -->
+
+  <!-- Add Medical Record Modal -->
+  <div class="modal-backdrop" id="add-record-modal">
+    <div class="modal-container">
+      <div class="modal-header">
+        <div class="modal-title">
+          <i data-lucide="file-plus-2" class="modal-icon text-primary"></i>
+          <div>
+            <h3>New Medical Encounter</h3>
+            <p>Add clinical diagnosis, prescriptions, and notes</p>
+          </div>
+        </div>
+        <button class="modal-close" id="btn-close-record-modal">
+          <i data-lucide="x"></i>
+        </button>
+      </div>
+
+      <form id="add-record-form" class="modal-form" novalidate>
+        <div class="modal-body">
+          <div class="form-row-grid">
+            <!-- Consultation Type -->
+            <div class="form-group">
+              <label for="rec-type" class="required">Encounter Type</label>
+              <select id="rec-type" required>
+                <option value="Regular Checkup">Regular Checkup</option>
+                <option value="Emergency Visit">Emergency Visit</option>
+                <option value="Specialist Follow-up">Specialist Follow-up</option>
+                <option value="Diagnostic Review">Diagnostic Review</option>
+              </select>
+            </div>
+
+            <!-- Attending Physician -->
+            <div class="form-group">
+              <label for="rec-doctor" class="required">Attending Doctor/Staff</label>
+              <input type="text" id="rec-doctor" value="Dr. Rajesh Kumar" required>
+            </div>
+          </div>
+
+          <!-- Vitals Input Grid -->
+          <fieldset class="form-fieldset">
+            <legend>Patient Vitals</legend>
+            <div class="vitals-row">
+              <div class="form-group">
+                <label for="rec-bp">Blood Pressure (mmHg)</label>
+                <input type="text" id="rec-bp" placeholder="e.g. 120/80">
+              </div>
+              <div class="form-group">
+                <label for="rec-pulse">Heart Rate (bpm)</label>
+                <input type="number" id="rec-pulse" placeholder="e.g. 72">
+              </div>
+              <div class="form-group">
+                <label for="rec-temp">Temperature (°F)</label>
+                <input type="text" id="rec-temp" placeholder="e.g. 98.6">
+              </div>
+            </div>
+          </fieldset>
+
+          <!-- Diagnosis -->
+          <div class="form-group">
+            <label for="rec-diagnosis" class="required">Primary Diagnosis / Assessments</label>
+            <input type="text" id="rec-diagnosis" placeholder="e.g. Acute Rhinitis, Hypertensive Crisis" required>
+            <span class="field-error" id="rec-diagnosis-error">Diagnosis is required for the record.</span>
+          </div>
+
+          <!-- Prescription Details -->
+          <div class="form-group">
+            <label for="rec-prescription">Prescriptions & Dosages</label>
+            <textarea id="rec-prescription" rows="2" placeholder="e.g. Paracetamol 650mg TDS x 3 days, Tab Allegra 120mg OD x 5 days"></textarea>
+          </div>
+
+          <!-- Clinical Notes -->
+          <div class="form-group">
+            <label for="rec-nots">Clinical Encounter Notes</label>
+            <textarea id="rec-nots" rows="3" placeholder="Detailed symptoms, recommendations, and diagnostic plans..."></textarea>
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline" id="btn-cancel-record">Discard</button>
+          <button type="submit" class="btn btn-primary">
+            <i data-lucide="check"></i>
+            <span>Commit Record</span>
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Main JavaScript File -->
+  <script src="app.js"></script>
+</body>
+</html>
