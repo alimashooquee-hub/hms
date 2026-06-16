@@ -8,38 +8,45 @@
   --bg-surface: #1f2937;
   --bg-surface-glass: rgba(17, 24, 39, 0.7);
   --bg-surface-glow: rgba(14, 165, 233, 0.03);
-  
+
   --border-color: rgba(255, 255, 255, 0.08);
   --border-focus: rgba(14, 165, 233, 0.5);
 
-  --color-primary: #0ea5e9; /* Teal-Blue Cyan */
+  --color-primary: #0ea5e9;
+  /* Teal-Blue Cyan */
   --color-primary-hover: #0284c7;
   --color-primary-rgb: 14, 165, 233;
-  
-  --color-success: #10b981; /* Emerland Green */
+
+  --color-success: #10b981;
+  /* Emerland Green */
   --color-success-hover: #059669;
-  --color-warning: #f59e0b; /* Amber */
-  --color-danger: #ef4444; /* Rose Red */
+  --color-warning: #f59e0b;
+  /* Amber */
+  --color-danger: #ef4444;
+  /* Rose Red */
   --color-danger-hover: #dc2626;
-  
-  --text-primary: #f3f4f6; /* White-Gray */
-  --text-secondary: #9ca3af; /* Light Gray */
-  --text-muted: #6b7280; /* Darker Gray */
-  
+
+  --text-primary: #f3f4f6;
+  /* White-Gray */
+  --text-secondary: #9ca3af;
+  /* Light Gray */
+  --text-muted: #6b7280;
+  /* Darker Gray */
+
   /* Fonts */
   --font-main: 'Outfit', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-  
+
   /* Shadows */
   --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
   --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
   --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
   --shadow-glow: 0 0 15px rgba(14, 165, 233, 0.15);
-  
+
   /* Transitions */
   --transition-fast: 0.15s ease;
   --transition-normal: 0.25s cubic-bezier(0.4, 0, 0.2, 1);
   --transition-slow: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  
+
   /* Radius */
   --radius-sm: 6px;
   --radius-md: 10px;
@@ -65,7 +72,10 @@ body {
   min-height: 100vh;
 }
 
-input, select, textarea, button {
+input,
+select,
+textarea,
+button {
   font-family: inherit;
   font-size: inherit;
   color: inherit;
@@ -131,7 +141,8 @@ a {
   border-color: var(--text-secondary);
 }
 
-/* Spacing between/* JavaScript functions for auth view were moved to app.js */.btn-outline {
+/* Spacing between/* JavaScript functions for auth view were moved to app.js */
+.btn-outline {
   margin-top: 20px;
 }
 
@@ -200,9 +211,9 @@ a {
   min-height: 100vh;
   align-items: center;
   justify-content: center;
-  background: radial-gradient(circle at 10% 20%, rgba(14, 165, 233, 0.1) 0%, rgba(0, 0, 0, 0) 90%), 
-              radial-gradient(circle at 90% 80%, rgba(99, 102, 241, 0.1) 0%, rgba(0, 0, 0, 0) 90%),
-              #070a13;
+  background: radial-gradient(circle at 10% 20%, rgba(14, 165, 233, 0.1) 0%, rgba(0, 0, 0, 0) 90%),
+    radial-gradient(circle at 90% 80%, rgba(99, 102, 241, 0.1) 0%, rgba(0, 0, 0, 0) 90%),
+    #070a13;
   padding: 20px;
 }
 
@@ -310,7 +321,8 @@ a {
   pointer-events: none;
 }
 
-.error-msg, .field-error {
+.error-msg,
+.field-error {
   display: none;
   font-size: 0.75rem;
   color: var(--color-danger);
@@ -350,9 +362,21 @@ a {
 }
 
 @keyframes shake {
-  0%, 100% { transform: translateX(0); }
-  20%, 60% { transform: translateX(-6px); }
-  40%, 80% { transform: translateX(6px); }
+
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+
+  20%,
+  60% {
+    transform: translateX(-6px);
+  }
+
+  40%,
+  80% {
+    transform: translateX(6px);
+  }
 }
 
 @keyframes slideInUp {
@@ -360,6 +384,7 @@ a {
     transform: translateY(20px);
     opacity: 0;
   }
+
   to {
     transform: translateY(0);
     opacity: 1;
@@ -367,12 +392,13 @@ a {
 }
 
 
-  
+
 /* ==========================================================================
    APP SHELL LAYOUT
    ========================================================================== */
 .app-shell-container {
-  display: none; /* Block when authenticated */
+  display: none;
+  /* Block when authenticated */
   grid-template-columns: 260px 1fr;
   min-height: 100vh;
 }
@@ -586,8 +612,15 @@ a {
 }
 
 @keyframes fadeIn {
-  from { opacity: 0; transform: translateY(4px); }
-  to { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 /* ==========================================================================
@@ -682,9 +715,20 @@ a {
   justify-content: center;
 }
 
-.stat-icon-wrapper.p-blue { background-color: rgba(14, 165, 233, 0.08); color: var(--color-primary); }
-.stat-icon-wrapper.p-teal { background-color: rgba(20, 184, 166, 0.08); color: #14b8a6; }
-.stat-icon-wrapper.p-purple { background-color: rgba(99, 102, 241, 0.08); color: #6366f1; }
+.stat-icon-wrapper.p-blue {
+  background-color: rgba(14, 165, 233, 0.08);
+  color: var(--color-primary);
+}
+
+.stat-icon-wrapper.p-teal {
+  background-color: rgba(20, 184, 166, 0.08);
+  color: #14b8a6;
+}
+
+.stat-icon-wrapper.p-purple {
+  background-color: rgba(99, 102, 241, 0.08);
+  color: #6366f1;
+}
 
 .stat-icon {
   width: 26px;
@@ -717,10 +761,18 @@ a {
   gap: 4px;
 }
 
-.trend-up { color: var(--color-success); }
-.trend-flat { color: var(--text-muted); }
+.trend-up {
+  color: var(--color-success);
+}
 
-.trend-up i { width: 12px; height: 12px; }
+.trend-flat {
+  color: var(--text-muted);
+}
+
+.trend-up i {
+  width: 12px;
+  height: 12px;
+}
 
 /* Dashboard Content Grid */
 .dashboard-grid {
@@ -1110,8 +1162,8 @@ a {
   color: var(--color-danger);
 }
 
-.form-group input, 
-.form-group select, 
+.form-group input,
+.form-group select,
 .form-group textarea {
   width: 100%;
   background-color: rgba(0, 0, 0, 0.15);
@@ -1122,8 +1174,8 @@ a {
   transition: all var(--transition-fast);
 }
 
-.form-group input:focus, 
-.form-group select:focus, 
+.form-group input:focus,
+.form-group select:focus,
 .form-group textarea:focus {
   border-color: var(--color-primary);
   box-shadow: 0 0 0 3px rgba(14, 165, 233, 0.12);
@@ -1166,8 +1218,8 @@ a {
 }
 
 .glass-card {
-  background: radial-gradient(circle at 10% 20%, rgba(14, 165, 233, 0.05) 0%, rgba(0, 0, 0, 0) 90%), 
-              var(--bg-secondary);
+  background: radial-gradient(circle at 10% 20%, rgba(14, 165, 233, 0.05) 0%, rgba(0, 0, 0, 0) 90%),
+    var(--bg-secondary);
   border: 1px solid var(--border-color);
   border-radius: var(--radius-lg);
   padding: 24px 32px;
@@ -1436,7 +1488,8 @@ a {
    5. MODAL SYSTEM
    ========================================================================== */
 .modal-backdrop {
-  display: none; /* Flex when toggled active */
+  display: none;
+  /* Flex when toggled active */
   position: fixed;
   top: 0;
   left: 0;
@@ -1567,13 +1620,25 @@ a {
 }
 
 @keyframes fadeInModal {
-  from { opacity: 0; }
-  to { opacity: 1; }
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
 }
 
 @keyframes scaleInModal {
-  from { transform: scale(0.95); opacity: 0; }
-  to { transform: scale(1); opacity: 1; }
+  from {
+    transform: scale(0.95);
+    opacity: 0;
+  }
+
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
 }
 
 /* ==========================================================================
@@ -1619,6 +1684,7 @@ a {
 .toast.success {
   border-left-color: var(--color-success);
 }
+
 .toast.success i {
   color: var(--color-success);
 }
@@ -1626,13 +1692,21 @@ a {
 .toast.danger {
   border-left-color: var(--color-danger);
 }
+
 .toast.danger i {
   color: var(--color-danger);
 }
 
 @keyframes slideInLeft {
-  from { transform: translateX(100px); opacity: 0; }
-  to { transform: translateX(0); opacity: 1; }
+  from {
+    transform: translateX(100px);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
 }
 
 /* ==========================================================================
@@ -1642,24 +1716,25 @@ a {
   .app-shell-container {
     grid-template-columns: 1fr;
   }
-  
+
   .sidebar {
-    display: none; /* Mobile navigation would go here, toggleable menu */
+    display: none;
+    /* Mobile navigation would go here, toggleable menu */
   }
-  
+
   .stats-grid {
     grid-template-columns: repeat(2, 1fr);
   }
-  
+
   .dashboard-grid {
     grid-template-columns: 1fr;
   }
-  
+
   .patient-meta-grid {
     grid-template-columns: repeat(2, 1fr);
     gap: 16px;
   }
-  
+
   .glass-card {
     flex-direction: column;
     align-items: flex-start;
@@ -1671,43 +1746,43 @@ a {
   .stats-grid {
     grid-template-columns: 1fr;
   }
-  
+
   .form-grid {
     grid-template-columns: 1fr;
   }
-  
+
   .col-span-2 {
     grid-column: span 1;
   }
-  
+
   .vitals-row {
     grid-template-columns: 1fr;
   }
-  
+
   .top-bar {
     flex-direction: column;
     align-items: flex-start;
     gap: 12px;
     padding: 16px;
   }
-  
+
   .header-search input {
     width: 100%;
   }
-  
+
   .header-search input:focus {
     width: 100%;
   }
-  
+
   .top-bar-actions {
     width: 100%;
     justify-content: space-between;
   }
-  
+
   .content-viewport {
     padding: 16px;
   }
-  
+
   .patient-meta-grid {
     grid-template-columns: 1fr;
   }
