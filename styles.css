@@ -682,7 +682,7 @@ a {
 /* Stats Grid */
 .stats-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(5, 1fr);
   gap: 24px;
   margin-bottom: 32px;
 }
@@ -1709,6 +1709,27 @@ a {
   }
 }
 
+
+.status-pill {
+  display: inline-block;
+  padding: 4px 12px;
+  border-radius: var(--radius-sm);
+  font-weight: 600;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.status-pill.active {
+  background-color: rgba(16, 185, 129, 0.1);
+  color: var(--color-success);
+}
+
+.status-pill.inactive {
+  background-color: rgba(239, 68, 68, 0.1);
+  color: var(--color-danger);
+}
+
 /* ==========================================================================
    RESPONSIVENESS (MOBILE/TABLET SCALES)
    ========================================================================== */
@@ -1786,4 +1807,216 @@ a {
   .patient-meta-grid {
     grid-template-columns: 1fr;
   }
+}
+
+/* Treatment Status Badges */
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 10px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  border-radius: 9999px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  white-space: nowrap;
+}
+.status-waiting {
+  background-color: rgba(245, 158, 11, 0.1);
+  color: #f59e0b; /* Warning/Amber */
+}
+.status-consultation {
+  background-color: rgba(14, 165, 233, 0.1);
+  color: #0ea5e9; /* Primary/Blue */
+}
+.status-tests {
+  background-color: rgba(139, 92, 246, 0.1);
+  color: #8b5cf6; /* Purple */
+}
+.status-followup {
+  background-color: rgba(20, 184, 166, 0.1);
+  color: #14b8a6; /* Teal */
+}
+.status-completed {
+  background-color: rgba(16, 185, 129, 0.1);
+  color: #10b981; /* Success/Green */
+}
+.status-cancelled {
+  background-color: rgba(239, 68, 68, 0.1);
+  color: #ef4444; /* Danger/Red */
+}
+
+/* Clickable Cards */
+.clickable-card {
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+.clickable-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 15px -3px rgba(14, 165, 233, 0.2);
+  border-color: rgba(14, 165, 233, 0.5);
+}
+
+/* Inline Select */
+select.inline-select {
+  padding: 4px 8px;
+  border-radius: var(--radius-sm);
+  background-color: var(--bg-surface);
+  border: 1px solid var(--border-color);
+  color: var(--text-primary);
+  font-size: 0.8rem;
+  cursor: pointer;
+}
+select.inline-select:focus {
+  border-color: var(--color-primary);
+  outline: none;
+}
+
+/* ==========================================================================
+   MEDICAL RECORDS TIMELINE ITEMS (new card-less timeline layout)
+   ========================================================================== */
+.font-primary {
+  color: var(--color-primary);
+}
+
+.timeline-item {
+  display: flex;
+  gap: 16px;
+  position: relative;
+  padding-bottom: 24px;
+}
+
+.timeline-item:not(:last-child)::before {
+  content: '';
+  position: absolute;
+  left: 7px;
+  top: 18px;
+  bottom: 0;
+  width: 2px;
+  background-color: var(--border-color);
+}
+
+.timeline-marker {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  margin-top: 4px;
+  border: 2px solid var(--bg-primary);
+  box-shadow: 0 0 8px currentColor;
+}
+
+.timeline-content {
+  flex: 1;
+  background-color: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  transition: border-color var(--transition-fast);
+}
+
+.timeline-content:hover {
+  border-color: rgba(14, 165, 233, 0.25);
+}
+
+.timeline-content .timeline-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.timeline-content .timeline-header h4 {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.timeline-meta {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.timeline-meta .date {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+.timeline-body {
+  padding: 18px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.diagnosis-block,
+.prescription-block,
+.notes-block {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.diagnosis-block h5,
+.prescription-block h5,
+.notes-block h5 {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.diagnosis-block h5 i,
+.prescription-block h5 i,
+.notes-block h5 i {
+  width: 13px;
+  height: 13px;
+}
+
+.diagnosis-block p,
+.prescription-block p,
+.notes-block p {
+  font-size: 0.92rem;
+  color: var(--text-primary);
+  white-space: pre-line;
+  line-height: 1.6;
+}
+
+/* Print Styles */
+@media print {
+  body * {
+    visibility: hidden;
+  }
+  #print-token-area, #print-token-area * {
+    visibility: visible;
+  }
+  #print-token-area {
+    display: block !important;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    margin: 0;
+    padding: 20px;
+    font-family: 'Inter', sans-serif;
+  }
+  .token-slip {
+    border: 2px dashed #000;
+    padding: 20px;
+    width: 300px;
+    margin: 0 auto;
+    text-align: center;
+    color: #000;
+  }
+  .token-slip h2 { margin: 0 0 10px 0; font-size: 20px; font-weight: bold; }
+  .token-slip h1 { margin: 10px 0; font-size: 42px; font-weight: bold; }
+  .token-slip p { margin: 5px 0; font-size: 14px; }
+  .token-slip hr { margin: 15px 0; border-top: 1px dashed #000; border-bottom: none; }
 }

@@ -159,6 +159,38 @@
           <i data-lucide="user-plus"></i>
           <span>Register Patient</span>
         </a>
+        <a href="#doctors" class="nav-item" data-view="doctors" id="nav-doctors">
+          <i data-lucide="stethoscope"></i>
+          <span>Doctors</span>
+        </a>
+        <a href="#nurses" class="nav-item" data-view="nurses" id="nav-nurses">
+          <i data-lucide="heart-pulse"></i>
+          <span>Nurses</span>
+        </a>
+        <a href="#receptionists" class="nav-item" data-view="receptionists" id="nav-receptionists">
+          <i data-lucide="user-cog"></i>
+          <span>Receptionists</span>
+        </a>
+        <a href="#appointments" class="nav-item" data-view="appointments" id="nav-appointments">
+          <i data-lucide="calendar"></i>
+          <span>Appointments</span>
+        </a>
+        <a href="#billing" class="nav-item" data-view="billing" id="nav-billing">
+          <i data-lucide="receipt"></i>
+          <span>Billing</span>
+        </a>
+        <a href="#revenue" class="nav-item" data-view="revenue" id="nav-revenue">
+          <i data-lucide="wallet"></i>
+          <span>Revenue & Reports</span>
+        </a>
+        <a href="#users" class="nav-item" data-view="users" id="nav-users">
+          <i data-lucide="shield-check"></i>
+          <span>User Management</span>
+        </a>
+        <a href="#settings" class="nav-item" data-view="settings" id="nav-settings">
+          <i data-lucide="settings"></i>
+          <span>Settings</span>
+        </a>
       </nav>
 
       <div class="sidebar-footer">
@@ -201,9 +233,20 @@
       <div class="content-viewport">
         <!-- 1. DASHBOARD VIEW -->
         <section id="view-dashboard" class="app-view active">
+          <!-- Personalized Welcome Banner -->
+          <div class="dashboard-welcome-banner glass-card" style="margin-bottom: 24px; padding: 20px 24px; display: flex; align-items: center; justify-content: space-between; border-radius: var(--radius-lg); background: radial-gradient(circle at 10% 20%, rgba(14, 165, 233, 0.05) 0%, rgba(0, 0, 0, 0) 90%), var(--bg-secondary); border: 1px solid var(--border-color);">
+            <div style="display: flex; align-items: center; gap: 16px;">
+              <div class="user-avatar" id="dashboard-user-avatar" style="width: 48px; height: 48px; font-size: 1.1rem; background-color: var(--color-primary); color: #fff; font-weight: 600; display: flex; align-items: center; justify-content: center; border-radius: 50%;">U</div>
+              <div>
+                <h3 style="font-size: 1.25rem; font-weight: 600;" id="dashboard-welcome-msg">Welcome, User</h3>
+                <p style="color: var(--text-secondary); font-size: 0.85rem;" id="dashboard-role-msg">Role: User</p>
+              </div>
+            </div>
+          </div>
+
           <!-- Stats Grid -->
           <div class="stats-grid">
-            <div class="stat-card">
+            <div class="stat-card clickable-card" id="card-total-patients">
               <div class="stat-icon-wrapper p-blue">
                 <i data-lucide="users" class="stat-icon"></i>
               </div>
@@ -214,25 +257,58 @@
               </div>
             </div>
 
-            <div class="stat-card">
+            <div class="stat-card clickable-card" id="card-in-consultation">
               <div class="stat-icon-wrapper p-teal">
                 <i data-lucide="file-text" class="stat-icon"></i>
               </div>
               <div class="stat-details">
-                <h3>Medical Records</h3>
-                <p class="stat-number" id="stat-total-records">0</p>
-                <span class="stat-trend trend-up"><i data-lucide="trending-up"></i> +5% today</span>
+                <h3>Patients In Consultation</h3>
+                <p class="stat-number" id="stat-in-consultation">0</p>
+                <span class="stat-trend trend-up"><i data-lucide="trending-up"></i> Active now</span>
               </div>
             </div>
 
-            <div class="stat-card">
+            <div class="stat-card clickable-card" id="card-checked-out">
               <div class="stat-icon-wrapper p-purple">
-                <i data-lucide="clock" class="stat-icon"></i>
+                <i data-lucide="check-circle" class="stat-icon"></i>
               </div>
               <div class="stat-details">
-                <h3>Visits Today</h3>
-                <p class="stat-number" id="stat-today-visits">0</p>
+                <h3>Checked-Out Patients</h3>
+                <p class="stat-number" id="stat-checked-out">0</p>
                 <span class="stat-trend trend-flat">Updated real-time</span>
+              </div>
+            </div>
+
+            <div class="stat-card clickable-card" id="card-total-doctors">
+              <div class="stat-icon-wrapper p-teal">
+                <i data-lucide="stethoscope" class="stat-icon"></i>
+              </div>
+              <div class="stat-details">
+                <h3>Total Doctors</h3>
+                <p class="stat-number" id="stat-total-doctors">0</p>
+                <span class="stat-trend trend-up"><i data-lucide="trending-up"></i> Active staff</span>
+              </div>
+            </div>
+
+            <div class="stat-card clickable-card" id="card-waiting-patients">
+              <div class="stat-icon-wrapper p-warning" style="background-color: rgba(245, 158, 11, 0.08); color: #f59e0b;">
+                <i data-lucide="hourglass" class="stat-icon"></i>
+              </div>
+              <div class="stat-details">
+                <h3>Waiting Patients</h3>
+                <p class="stat-number" id="stat-waiting-queue">0</p>
+                <span class="stat-trend trend-flat">In the queue</span>
+              </div>
+            </div>
+
+            <div class="stat-card clickable-card" id="card-total-revenue">
+              <div class="stat-icon-wrapper p-green" style="background-color: rgba(16, 185, 129, 0.08); color: #10b981;">
+                <i data-lucide="dollar-sign" class="stat-icon"></i>
+              </div>
+              <div class="stat-details">
+                <h3>Total Revenue</h3>
+                <p class="stat-number" id="stat-total-revenue">₹0</p>
+                <span class="stat-trend trend-flat">From patient fees</span>
               </div>
             </div>
           </div>
@@ -324,6 +400,7 @@
                       <th>Contact</th>
                       <th>Blood Group</th>
                       <th>Joined Date</th>
+                      <th>Status</th>
                       <th>Actions</th>
                     </tr>
                   </thead>
@@ -425,6 +502,22 @@
                   <textarea id="reg-address" rows="2" placeholder="Street Address, Block/Area, City, State"></textarea>
                 </div>
 
+                <!-- Reason for Visit -->
+                <div class="form-group col-span-2">
+                  <label for="reg-reason" class="required">Reason for Visit</label>
+                  <input type="text" id="reg-reason" placeholder="e.g. Fever and body ache" required>
+                  <span class="field-error" id="reg-reason-error">Reason is required</span>
+                </div>
+
+                <!-- Assigned Doctor -->
+                <div class="form-group col-span-2">
+                  <label for="reg-assigned-doc" class="required">Assigned Doctor</label>
+                  <select id="reg-assigned-doc" required>
+                    <option value="">Select Doctor</option>
+                  </select>
+                  <span class="field-error" id="reg-assigned-doc-error">Please assign a doctor</span>
+                </div>
+
                 <!-- Chronic Conditions / History -->
                 <div class="form-group col-span-2">
                   <label for="reg-history">Primary Medical History / Allergies</label>
@@ -443,6 +536,180 @@
           </div>
         </section>
 
+        <!-- 5. DOCTORS VIEW -->
+        <section id="view-doctors" class="app-view">
+          <div class="card form-card">
+            <div class="card-header border-bottom">
+              <div class="card-title-group">
+                <i data-lucide="stethoscope" class="header-icon font-primary"></i>
+                <h4>Appoint New Doctor</h4>
+              </div>
+              <p class="subtitle">Enter doctor details to add to the system.</p>
+            </div>
+            <form id="doctor-form" class="clinical-form" novalidate>
+              <div class="form-grid">
+                <!-- Doctor ID (auto-generated) -->
+                <div class="form-group col-span-2">
+                  <label for="doc-id" class="required">Doctor ID</label>
+                  <input type="text" id="doc-id" readonly placeholder="Auto-generated" />
+                </div>
+                <!-- Full Name -->
+                <div class="form-group col-span-2">
+                  <label for="doc-name" class="required">Full Name</label>
+                  <input type="text" id="doc-name" placeholder="e.g. Dr. Maya Patel" required />
+                  <span class="field-error" id="doc-name-error">Name is required</span>
+                </div>
+                <!-- Gender -->
+                <div class="form-group">
+                  <label for="doc-gender" class="required">Gender</label>
+                  <select id="doc-gender" required>
+                    <option value="">Select Gender</option>
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                    <option value="Other">Other</option>
+                  </select>
+                  <span class="field-error" id="doc-gender-error">Please select a gender</span>
+                </div>
+                <!-- Specialization -->
+                <div class="form-group col-span-2">
+                  <label for="doc-specialization" class="required">Specialization</label>
+                  <select id="doc-specialization" required>
+                    <option value="">Select specialization</option>
+                    <option>General Physician</option>
+                    <option>Cardiologist</option>
+                    <option>Neurologist</option>
+                    <option>Pediatrician</option>
+                    <option>Orthopedic Surgeon</option>
+                    <option>Dermatologist</option>
+                    <option>Gynecologist</option>
+                    <option>ENT Specialist</option>
+                    <option>Ophthalmologist</option>
+                    <option>Dentist</option>
+                  </select>
+                  <span class="field-error" id="doc-specialization-error">Select a specialization</span>
+                </div>
+                <!-- Qualification -->
+                <div class="form-group col-span-2">
+                  <label for="doc-qualification" class="required">Qualification</label>
+                  <input type="text" id="doc-qualification" placeholder="e.g. MBBS, MD" required />
+                  <span class="field-error" id="doc-qualification-error">Qualification required</span>
+                </div>
+                <!-- Years of Experience -->
+                <div class="form-group">
+                  <label for="doc-experience" class="required">Years of Experience</label>
+                  <input type="number" id="doc-experience" min="0" placeholder="e.g. 5" required />
+                  <span class="field-error" id="doc-experience-error">Enter a positive number</span>
+                </div>
+                <!-- Email -->
+                <div class="form-group">
+                  <label for="doc-email" class="required">Email Address</label>
+                  <input type="email" id="doc-email" placeholder="e.g. doctor@example.com" required />
+                  <span class="field-error" id="doc-email-error">Enter a valid email</span>
+                </div>
+                <!-- Phone -->
+                <div class="form-group">
+                  <label for="doc-phone" class="required">Phone Number</label>
+                  <input type="tel" id="doc-phone" placeholder="11-digit number" required />
+                  <span class="field-error" id="doc-phone-error">Enter 11 digit phone</span>
+                </div>
+                <!-- Username -->
+                <div class="form-group col-span-2">
+                  <label for="doc-username" class="required">Username</label>
+                  <input type="text" id="doc-username" placeholder="Unique login name" required />
+                  <span class="field-error" id="doc-username-error">Username required</span>
+                </div>
+                <!-- Password -->
+                <div class="form-group col-span-2">
+                  <label for="doc-password" class="required">Password</label>
+                  <input type="password" id="doc-password" required />
+                  <span class="field-error" id="doc-password-error">Password required</span>
+                </div>
+                <!-- Joining Date -->
+                <div class="form-group">
+                  <label for="doc-joining" class="required">Joining Date</label>
+                  <input type="date" id="doc-joining" required />
+                  <span class="field-error" id="doc-joining-error">Select joining date</span>
+                </div>
+                <!-- Status -->
+                <div class="form-group">
+                  <label for="doc-status" class="required">Status</label>
+                  <select id="doc-status" required>
+                    <option value="">Select status</option>
+                    <option>Active</option>
+                    <option>Inactive</option>
+                  </select>
+                  <span class="field-error" id="doc-status-error">Select status</span>
+                </div>
+                <!-- Consultation Fee -->
+                <div class="form-group">
+                  <label for="doc-fee" class="required">Consultation Fee (₹)</label>
+                  <input type="number" id="doc-fee" min="1" placeholder="e.g. 1500" required />
+                  <span class="field-error" id="doc-fee-error">Enter a valid fee (> 0)</span>
+                </div>
+              </div>
+              <div class="form-actions border-top">
+                <button type="button" class="btn btn-outline" id="btn-cancel-doc">Cancel</button>
+                <button type="submit" class="btn btn-primary">
+                  <i data-lucide="check"></i>
+                  <span>Appoint Doctor</span>
+                </button>
+              </div>
+            </form>
+          </div>
+          <!-- Doctors Table -->
+          <div class="table-actions-bar">
+            <!-- Search & Filters -->
+            <div class="filter-panel">
+              <div class="search-input-wrapper">
+                <i data-lucide="search" class="search-inner-icon"></i>
+                <input type="text" id="doctor-search-input" placeholder="Search by name, ID...">
+              </div>
+              <div class="select-wrapper">
+                <select id="filter-doc-specialization">
+                  <option value="">All Specializations</option>
+                  <option value="General Physician">General Physician</option>
+                  <option value="Cardiologist">Cardiologist</option>
+                  <option value="Neurologist">Neurologist</option>
+                  <option value="Pediatrician">Pediatrician</option>
+                  <option value="Orthopedic Surgeon">Orthopedic Surgeon</option>
+                  <option value="Dermatologist">Dermatologist</option>
+                  <option value="Gynecologist">Gynecologist</option>
+                  <option value="ENT Specialist">ENT Specialist</option>
+                  <option value="Ophthalmologist">Ophthalmologist</option>
+                  <option value="Dentist">Dentist</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="card table-card" style="margin-top: 16px;">
+              <div class="card-header border-bottom">
+                <div class="card-title-group">
+                  <i data-lucide="list" class="header-icon font-primary"></i>
+                  <h4>Doctors Directory</h4>
+                </div>
+              </div>
+              <div class="card-body table-responsive">
+                <table class="data-table" id="doctors-data-table">
+                  <thead>
+                    <tr>
+                      <th>Doctor ID</th>
+                      <th>Full Name</th>
+                      <th>Specialization</th>
+                      <th>Consultation Fee</th>
+                      <th>Qualification</th>
+                      <th>Experience</th>
+                      <th>Phone</th>
+                      <th>Status</th>
+                      <th>Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody id="doctors-table-body"></tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </section>
+
         <!-- 4. MEDICAL RECORDS VIEW -->
         <section id="view-records" class="app-view">
           <div class="records-header-details" id="records-patient-banner">
@@ -452,7 +719,10 @@
                 <div class="patient-large-avatar" id="record-avatar">PS</div>
                 <div class="patient-main-info">
                   <h3 id="record-patient-name">Rahul Sharma</h3>
-                  <span class="pid-tag" id="record-patient-id">PAT-2026-0001</span>
+                  <div style="display: flex; gap: 10px; align-items: center; margin-top: 4px;">
+                    <span class="pid-tag" id="record-patient-id">PAT-2026-0001</span>
+                    <div id="record-patient-status"></div>
+                  </div>
                 </div>
               </div>
               <div class="patient-meta-grid">
@@ -479,6 +749,420 @@
                 <!-- Dynamic Encounters -->
               </div>
             </div>
+          </div>
+        </section>
+
+        <!-- 6. NURSES VIEW -->
+        <section id="view-nurses" class="app-view">
+          <div class="card form-card">
+            <div class="card-header border-bottom">
+              <div class="card-title-group">
+                <i data-lucide="heart-pulse" class="header-icon font-primary"></i>
+                <h4>Register New Nurse</h4>
+              </div>
+              <p class="subtitle">Enter nurse details to add to the system.</p>
+            </div>
+            <form id="nurse-form" class="clinical-form" novalidate>
+              <div class="form-grid">
+                <div class="form-group col-span-2">
+                  <label for="nurse-name" class="required">Full Name</label>
+                  <input type="text" id="nurse-name" placeholder="e.g. Nurse Sarah" required />
+                  <span class="field-error" id="nurse-name-error">Name is required</span>
+                </div>
+                <div class="form-group">
+                  <label for="nurse-gender" class="required">Gender</label>
+                  <select id="nurse-gender" required>
+                    <option value="">Select Gender</option>
+                    <option>Male</option>
+                    <option>Female</option>
+                    <option>Other</option>
+                  </select>
+                  <span class="field-error" id="nurse-gender-error">Gender is required</span>
+                </div>
+                <div class="form-group">
+                  <label for="nurse-dept" class="required">Department</label>
+                  <input type="text" id="nurse-dept" placeholder="e.g. Pediatrics" required />
+                  <span class="field-error" id="nurse-dept-error">Department is required</span>
+                </div>
+                <div class="form-group">
+                  <label for="nurse-email" class="required">Email Address</label>
+                  <input type="email" id="nurse-email" placeholder="e.g. sarah@example.com" required />
+                  <span class="field-error" id="nurse-email-error">Enter valid email</span>
+                </div>
+                <div class="form-group">
+                  <label for="nurse-phone" class="required">Phone Number</label>
+                  <input type="tel" id="nurse-phone" placeholder="e.g. 9876543210" required />
+                  <span class="field-error" id="nurse-phone-error">Enter 10 digit phone</span>
+                </div>
+              </div>
+              <div class="form-actions border-top">
+                <button type="button" class="btn btn-outline" id="btn-cancel-nurse">Cancel</button>
+                <button type="submit" class="btn btn-primary">
+                  <i data-lucide="check"></i>
+                  <span>Register Nurse</span>
+                </button>
+              </div>
+            </form>
+          </div>
+          <div class="card table-card" style="margin-top: 16px;">
+            <div class="card-header border-bottom">
+              <div class="card-title-group">
+                <i data-lucide="list" class="header-icon font-primary"></i>
+                <h4>Nurses Directory</h4>
+              </div>
+            </div>
+            <div class="card-body table-responsive">
+              <table class="data-table" id="nurses-data-table">
+                <thead>
+                  <tr>
+                    <th>Nurse ID</th>
+                    <th>Full Name</th>
+                    <th>Gender</th>
+                    <th>Department</th>
+                    <th>Email</th>
+                    <th>Phone</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="nurses-table-body"></tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- 7. RECEPTIONISTS VIEW -->
+        <section id="view-receptionists" class="app-view">
+          <div class="card form-card">
+            <div class="card-header border-bottom">
+              <div class="card-title-group">
+                <i data-lucide="user-cog" class="header-icon font-primary"></i>
+                <h4>Register New Receptionist</h4>
+              </div>
+              <p class="subtitle">Enter receptionist details to add to the system.</p>
+            </div>
+            <form id="receptionist-form" class="clinical-form" novalidate>
+              <div class="form-grid">
+                <div class="form-group col-span-2">
+                  <label for="receptionist-name" class="required">Full Name</label>
+                  <input type="text" id="receptionist-name" placeholder="e.g. Receptionist Jane" required />
+                  <span class="field-error" id="receptionist-name-error">Name is required</span>
+                </div>
+                <div class="form-group">
+                  <label for="receptionist-gender" class="required">Gender</label>
+                  <select id="receptionist-gender" required>
+                    <option value="">Select Gender</option>
+                    <option>Male</option>
+                    <option>Female</option>
+                    <option>Other</option>
+                  </select>
+                  <span class="field-error" id="receptionist-gender-error">Gender is required</span>
+                </div>
+                <div class="form-group">
+                  <label for="receptionist-email" class="required">Email Address</label>
+                  <input type="email" id="receptionist-email" placeholder="e.g. jane@example.com" required />
+                  <span class="field-error" id="receptionist-email-error">Enter valid email</span>
+                </div>
+                <div class="form-group">
+                  <label for="receptionist-phone" class="required">Phone Number</label>
+                  <input type="tel" id="receptionist-phone" placeholder="e.g. 9876543210" required />
+                  <span class="field-error" id="receptionist-phone-error">Enter 10 digit phone</span>
+                </div>
+              </div>
+              <div class="form-actions border-top">
+                <button type="button" class="btn btn-outline" id="btn-cancel-receptionist">Cancel</button>
+                <button type="submit" class="btn btn-primary">
+                  <i data-lucide="check"></i>
+                  <span>Register Receptionist</span>
+                </button>
+              </div>
+            </form>
+          </div>
+          <div class="card table-card" style="margin-top: 16px;">
+            <div class="card-header border-bottom">
+              <div class="card-title-group">
+                <i data-lucide="list" class="header-icon font-primary"></i>
+                <h4>Receptionists Directory</h4>
+              </div>
+            </div>
+            <div class="card-body table-responsive">
+              <table class="data-table" id="receptionists-data-table">
+                <thead>
+                  <tr>
+                    <th>Receptionist ID</th>
+                    <th>Full Name</th>
+                    <th>Gender</th>
+                    <th>Email</th>
+                    <th>Phone</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="receptionists-table-body"></tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- 8. APPOINTMENTS VIEW -->
+        <section id="view-appointments" class="app-view">
+          <div class="card form-card">
+            <div class="card-header border-bottom">
+              <div class="card-title-group">
+                <i data-lucide="calendar" class="header-icon font-primary"></i>
+                <h4>Book Patient Appointment</h4>
+              </div>
+              <p class="subtitle">Enter scheduling details to reserve a slot.</p>
+            </div>
+            <form id="appointment-form" class="clinical-form" novalidate>
+              <div class="form-grid">
+                <div class="form-group col-span-2">
+                  <label for="apt-patient-name" class="required">Patient Name</label>
+                  <input type="text" id="apt-patient-name" placeholder="e.g. Rahul Sharma" required />
+                  <span class="field-error" id="apt-patient-name-error">Patient name is required</span>
+                </div>
+                <div class="form-group">
+                  <label for="apt-doc-name" class="required">Assigned Doctor</label>
+                  <select id="apt-doc-name" required>
+                    <option value="">Select Doctor</option>
+                  </select>
+                  <span class="field-error" id="apt-doc-name-error">Please assign a doctor</span>
+                </div>
+                <div class="form-group">
+                  <label for="apt-date" class="required">Appointment Date</label>
+                  <input type="date" id="apt-date" required />
+                  <span class="field-error" id="apt-date-error">Select date</span>
+                </div>
+                <div class="form-group">
+                  <label for="apt-time" class="required">Preferred Time</label>
+                  <input type="time" id="apt-time" required />
+                  <span class="field-error" id="apt-time-error">Select time</span>
+                </div>
+              </div>
+              <div class="form-actions border-top">
+                <button type="button" class="btn btn-outline" id="btn-cancel-apt">Cancel</button>
+                <button type="submit" class="btn btn-primary">
+                  <i data-lucide="check"></i>
+                  <span>Schedule Appointment</span>
+                </button>
+              </div>
+            </form>
+          </div>
+          <div class="card table-card" style="margin-top: 16px;">
+            <div class="card-header border-bottom">
+              <div class="card-title-group">
+                <i data-lucide="list" class="header-icon font-primary"></i>
+                <h4>Scheduled Appointments</h4>
+              </div>
+            </div>
+            <div class="card-body table-responsive">
+              <table class="data-table" id="appointments-data-table">
+                <thead>
+                  <tr>
+                    <th>Appointment ID</th>
+                    <th>Patient Name</th>
+                    <th>Doctor Name</th>
+                    <th>Date</th>
+                    <th>Time</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="appointments-table-body"></tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- 9. BILLING VIEW -->
+        <section id="view-billing" class="app-view">
+          <div class="card table-card">
+            <div class="card-header border-bottom">
+              <div class="card-title-group">
+                <i data-lucide="receipt" class="header-icon font-primary"></i>
+                <h4>Patient Billing Terminal</h4>
+              </div>
+            </div>
+            <div class="card-body table-responsive">
+              <table class="data-table" id="billing-data-table">
+                <thead>
+                  <tr>
+                    <th>Patient ID</th>
+                    <th>Patient Name</th>
+                    <th>Assigned Doctor</th>
+                    <th>Consultation Fee</th>
+                    <th>Billing Status</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="billing-table-body"></tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- 10. REVENUE & REPORTS VIEW -->
+        <section id="view-revenue" class="app-view">
+          <div class="stats-grid">
+            <div class="stat-card">
+              <div class="stat-icon-wrapper p-green" style="background-color: rgba(16, 185, 129, 0.08); color: #10b981;">
+                <i data-lucide="dollar-sign" class="stat-icon"></i>
+              </div>
+              <div class="stat-details">
+                <h3>Total Revenue</h3>
+                <p class="stat-number" id="revenue-total-earnings">₹0</p>
+                <span class="stat-trend trend-flat">From patient billing</span>
+              </div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-icon-wrapper p-teal">
+                <i data-lucide="users" class="stat-icon"></i>
+              </div>
+              <div class="stat-details">
+                <h3>Billed Patients</h3>
+                <p class="stat-number" id="revenue-total-patients">0</p>
+                <span class="stat-trend trend-flat">Paid invoices</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="card table-card" style="margin-top: 16px;">
+            <div class="card-header border-bottom">
+              <div class="card-title-group">
+                <i data-lucide="list" class="header-icon font-primary"></i>
+                <h4>Doctor Consultation Fee History</h4>
+              </div>
+            </div>
+            <div class="card-body table-responsive">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>Doctor ID</th>
+                    <th>Previous Fee</th>
+                    <th>New Fee</th>
+                    <th>Changed On</th>
+                  </tr>
+                </thead>
+                <tbody id="revenue-fee-history-table-body"></tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- 11. USER MANAGEMENT VIEW -->
+        <section id="view-users" class="app-view">
+          <div class="card form-card">
+            <div class="card-header border-bottom">
+              <div class="card-title-group">
+                <i data-lucide="shield-check" class="header-icon font-primary"></i>
+                <h4>Add Clinical Account</h4>
+              </div>
+              <p class="subtitle">Create credentials and assign clinical roles.</p>
+            </div>
+            <form id="user-management-form" class="clinical-form" novalidate>
+              <div class="form-grid">
+                <div class="form-group">
+                  <label for="usr-fullname" class="required">Full Name</label>
+                  <input type="text" id="usr-fullname" placeholder="e.g. Jane Doe" required />
+                  <span class="field-error" id="usr-fullname-error">Full name is required</span>
+                </div>
+                <div class="form-group">
+                  <label for="usr-email" class="required">Email Address</label>
+                  <input type="email" id="usr-email" placeholder="e.g. jane@hospital.com" required />
+                  <span class="field-error" id="usr-email-error">Enter valid email</span>
+                </div>
+                <div class="form-group">
+                  <label for="usr-password" class="required">Password</label>
+                  <input type="password" id="usr-password" placeholder="••••••••" required />
+                  <span class="field-error" id="usr-password-error">Password is required</span>
+                </div>
+                <div class="form-group">
+                  <label for="usr-role" class="required">Assign Role</label>
+                  <select id="usr-role" required>
+                    <option value="">Select Role</option>
+                    <option value="Admin">Admin</option>
+                    <option value="Doctor">Doctor</option>
+                    <option value="Nurse">Nurse</option>
+                    <option value="Receptionist">Receptionist</option>
+                  </select>
+                  <span class="field-error" id="usr-role-error">Please assign a role</span>
+                </div>
+              </div>
+              <div class="form-actions border-top">
+                <button type="button" class="btn btn-outline" id="btn-cancel-usr">Cancel</button>
+                <button type="submit" class="btn btn-primary">
+                  <i data-lucide="check"></i>
+                  <span>Add User</span>
+                </button>
+              </div>
+            </form>
+          </div>
+          <div class="card table-card" style="margin-top: 16px;">
+            <div class="card-header border-bottom">
+              <div class="card-title-group">
+                <i data-lucide="list" class="header-icon font-primary"></i>
+                <h4>Users List</h4>
+              </div>
+            </div>
+            <div class="card-body table-responsive">
+              <table class="data-table" id="users-data-table">
+                <thead>
+                  <tr>
+                    <th>User ID</th>
+                    <th>Full Name</th>
+                    <th>Email</th>
+                    <th>Role</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="users-table-body"></tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- 12. SETTINGS VIEW -->
+        <section id="view-settings" class="app-view">
+          <div class="card form-card">
+            <div class="card-header border-bottom">
+              <div class="card-title-group">
+                <i data-lucide="settings" class="header-icon font-primary"></i>
+                <h4>Hospital Profile Settings</h4>
+              </div>
+            </div>
+            <form id="settings-form" class="clinical-form">
+              <div class="form-grid">
+                <div class="form-group col-span-2">
+                  <label for="sett-hospital-name">Hospital Name</label>
+                  <input type="text" id="sett-hospital-name" value="MediFlow Hospital & Research Center">
+                </div>
+                <div class="form-group">
+                  <label for="sett-phone">Contact Number</label>
+                  <input type="text" id="sett-phone" value="+91-11-23456789">
+                </div>
+                <div class="form-group">
+                  <label for="sett-email">Primary Email</label>
+                  <input type="email" id="sett-email" value="contact@mediflow.org">
+                </div>
+                <div class="form-group col-span-2">
+                  <label for="sett-address">Address</label>
+                  <textarea id="sett-address" rows="2">123 Green Avenue, New Delhi, Delhi - 110001</textarea>
+                </div>
+              </div>
+              <div class="form-actions border-top" style="margin-top: 24px;">
+                <button type="button" class="btn btn-primary" onclick="showToast('Settings saved successfully.', 'success')">Save Changes</button>
+              </div>
+            </form>
+          </div>
+        </section>
+
+        <!-- 13. ACCESS DENIED VIEW -->
+        <section id="view-access-denied" class="app-view">
+          <div class="card panel-card" style="max-width: 500px; margin: 40px auto; text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: center; height: auto; padding: 40px 24px; gap: 16px;">
+            <div style="width: 64px; height: 64px; border-radius: 50%; background-color: rgba(239,68,68,0.1); color: var(--color-danger); display: flex; align-items: center; justify-content: center;">
+              <i data-lucide="shield-alert" style="width: 36px; height: 36px;"></i>
+            </div>
+            <h2 style="font-size: 1.5rem; font-weight: 600;">Access Denied</h2>
+            <p style="color: var(--text-secondary); font-size: 0.92rem; line-height: 1.6;">You do not have access privileges for this module. Please contact the system administrator.</p>
+            <button class="btn btn-primary" style="margin-top: 8px;" onclick="redirectToHomeDashboard()">Go to Dashboard</button>
           </div>
         </section>
 
@@ -521,8 +1205,23 @@
             <!-- Attending Physician -->
             <div class="form-group">
               <label for="rec-doctor" class="required">Attending Doctor/Staff</label>
-              <input type="text" id="rec-doctor" value="Dr. Rajesh Kumar" required>
+              <select id="rec-doctor" required>
+                <option value="">Select Doctor</option>
+              </select>
             </div>
+          </div>
+          
+          <!-- Update Patient Status -->
+          <div class="form-group">
+            <label for="rec-update-status" class="required">Update Treatment Status</label>
+            <select id="rec-update-status" required>
+              <option value="Waiting">Waiting</option>
+              <option value="In Consultation">In Consultation</option>
+              <option value="Tests Required">Tests Required</option>
+              <option value="Follow-Up Required">Follow-Up Required</option>
+              <option value="Treatment Completed">Treatment Completed</option>
+              <option value="Cancelled">Cancelled</option>
+            </select>
           </div>
 
           <!-- Vitals Input Grid -->
@@ -572,6 +1271,341 @@
           </button>
         </div>
       </form>
+    </div>
+  </div>
+
+  <!-- Visits Today Modal -->
+  <div class="modal-backdrop" id="visits-today-modal">
+    <div class="modal-container" style="max-width: 800px;">
+      <div class="modal-header">
+        <div class="modal-title">
+          <i data-lucide="clock" class="modal-icon p-purple" style="color: #6366f1;"></i>
+          <div>
+            <h3>Visits Today</h3>
+            <p>Manage today's clinical encounters and statuses</p>
+          </div>
+        </div>
+        <button class="modal-close" id="btn-close-visits-modal">
+          <i data-lucide="x"></i>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="table-responsive">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Record ID</th>
+                <th>Patient</th>
+                <th>Type</th>
+                <th>Doctor</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody id="visits-today-table-body">
+              <!-- Dynamically populated -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Queue Modal -->
+  <div class="modal-backdrop" id="queue-modal">
+    <div class="modal-container" style="max-width: 800px;">
+      <div class="modal-header">
+        <div class="modal-title">
+          <i data-lucide="hourglass" class="modal-icon p-warning" style="color: #f59e0b;"></i>
+          <div>
+            <h3>Patient Queue</h3>
+            <p>Manage patient workflow and waiting queue</p>
+          </div>
+        </div>
+        <button class="modal-close" id="btn-close-queue-modal">
+          <i data-lucide="x"></i>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="table-responsive">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Token No</th>
+                <th>Patient Name</th>
+                <th>Doctor</th>
+                <th>Department</th>
+                <th>Consultation Fee</th>
+                <th>Queue Status</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="queue-table-body">
+              <!-- Dynamically populated -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Printable Token Area -->
+  <div id="print-token-area" style="display: none;">
+    <!-- Populated by JS -->
+  </div>
+
+  <!-- Edit Patient Modal -->
+  <div class="modal-backdrop" id="edit-patient-modal">
+    <div class="modal-container" style="max-width: 800px;">
+      <div class="modal-header">
+        <div class="modal-title">
+          <i data-lucide="user-cog" class="modal-icon p-blue"></i>
+          <div>
+            <h3>Edit Patient Profile</h3>
+            <p>Update patient information</p>
+          </div>
+        </div>
+        <button class="modal-close" id="btn-close-edit-patient">
+          <i data-lucide="x"></i>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form id="edit-patient-form">
+          <input type="hidden" id="edit-patient-id">
+          <div class="form-row-grid">
+            <div class="form-group col-span-2">
+              <label for="edit-pat-name" class="required">Full Name</label>
+              <input type="text" id="edit-pat-name" required>
+            </div>
+            <div class="form-group">
+              <label for="edit-pat-dob" class="required">Date of Birth</label>
+              <input type="date" id="edit-pat-dob" required>
+            </div>
+            <div class="form-group">
+              <label for="edit-pat-gender" class="required">Gender</label>
+              <select id="edit-pat-gender" required>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+                <option value="Other">Other</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="edit-pat-phone" class="required">Phone</label>
+              <input type="text" id="edit-pat-phone" required>
+            </div>
+            <div class="form-group">
+              <label for="edit-pat-email">Email</label>
+              <input type="email" id="edit-pat-email">
+            </div>
+            <div class="form-group col-span-2">
+              <label for="edit-pat-address">Address</label>
+              <textarea id="edit-pat-address" rows="2"></textarea>
+            </div>
+          </div>
+          <div class="form-actions border-top" style="margin-top: 24px;">
+            <button type="button" class="btn btn-outline" id="btn-cancel-edit-patient">Cancel</button>
+            <button type="submit" class="btn btn-primary">Save Changes</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Edit Record Modal -->
+  <div class="modal-backdrop" id="edit-record-modal">
+    <div class="modal-container" style="max-width: 800px;">
+      <div class="modal-header">
+        <div class="modal-title">
+          <i data-lucide="edit-3" class="modal-icon p-teal"></i>
+          <div>
+            <h3>Edit Medical Record</h3>
+            <p>Update consultation details</p>
+          </div>
+        </div>
+        <button class="modal-close" id="btn-close-edit-record">
+          <i data-lucide="x"></i>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form id="edit-record-form">
+          <input type="hidden" id="edit-record-id">
+          <div class="form-row-grid">
+            <div class="form-group col-span-2">
+              <label for="edit-rec-diagnosis" class="required">Clinical Diagnosis</label>
+              <input type="text" id="edit-rec-diagnosis" required>
+            </div>
+            <div class="form-group col-span-2">
+              <label for="edit-rec-prescription">Prescription</label>
+              <textarea id="edit-rec-prescription" rows="3"></textarea>
+            </div>
+            <div class="form-group col-span-2">
+              <label for="edit-rec-notes">Consultation Notes</label>
+              <textarea id="edit-rec-notes" rows="3"></textarea>
+            </div>
+          </div>
+          <div class="form-actions border-top" style="margin-top: 24px;">
+            <button type="button" class="btn btn-outline" id="btn-cancel-edit-record">Cancel</button>
+            <button type="submit" class="btn btn-primary">Save Changes</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Edit Doctor Modal -->
+  <div class="modal-backdrop" id="edit-doctor-modal">
+    <div class="modal-container" style="max-width: 800px;">
+      <div class="modal-header">
+        <div class="modal-title">
+          <i data-lucide="stethoscope" class="modal-icon p-teal"></i>
+          <div>
+            <h3>Edit Doctor Profile</h3>
+            <p>Update doctor information and status</p>
+          </div>
+        </div>
+        <button class="modal-close" id="btn-close-edit-doctor">
+          <i data-lucide="x"></i>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form id="edit-doctor-form">
+          <input type="hidden" id="edit-doc-id">
+          <div class="form-row-grid">
+            <div class="form-group col-span-2">
+              <label for="edit-doc-name" class="required">Full Name</label>
+              <input type="text" id="edit-doc-name" required>
+            </div>
+            <div class="form-group">
+              <label for="edit-doc-specialization" class="required">Specialization</label>
+              <select id="edit-doc-specialization" required>
+                <option value="Cardiology">Cardiology</option>
+                <option value="Neurology">Neurology</option>
+                <option value="Orthopedics">Orthopedics</option>
+                <option value="Pediatrics">Pediatrics</option>
+                <option value="General Medicine">General Medicine</option>
+                <option value="Dermatology">Dermatology</option>
+                <option value="Oncology">Oncology</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="edit-doc-phone" class="required">Phone Number</label>
+              <input type="text" id="edit-doc-phone" required>
+            </div>
+            <div class="form-group">
+              <label for="edit-doc-email" class="required">Email Address</label>
+              <input type="email" id="edit-doc-email" required>
+            </div>
+            <div class="form-group">
+              <label for="edit-doc-status" class="required">Status</label>
+              <select id="edit-doc-status" required>
+                <option value="Active">Active</option>
+                <option value="On Leave">On Leave</option>
+                <option value="Busy">Busy</option>
+                <option value="Off Duty">Off Duty</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-actions border-top" style="margin-top: 24px;">
+            <button type="button" class="btn btn-outline" id="btn-cancel-edit-doctor">Cancel</button>
+            <button type="submit" class="btn btn-primary">Save Changes</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Edit User Modal -->
+  <div class="modal-backdrop" id="edit-user-modal">
+    <div class="modal-container" style="max-width: 500px;">
+      <div class="modal-header">
+        <div class="modal-title">
+          <i data-lucide="user-cog" class="modal-icon p-blue"></i>
+          <div>
+            <h3>Edit Clinical Account</h3>
+            <p>Modify user details and role</p>
+          </div>
+        </div>
+        <button class="modal-close" id="btn-close-edit-user">
+          <i data-lucide="x"></i>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form id="edit-user-form">
+          <input type="hidden" id="edit-usr-id">
+          <div class="form-grid" style="grid-template-columns: 1fr;">
+            <div class="form-group">
+              <label for="edit-usr-fullname" class="required">Full Name</label>
+              <input type="text" id="edit-usr-fullname" required>
+            </div>
+            <div class="form-group">
+              <label for="edit-usr-email" class="required">Email Address</label>
+              <input type="email" id="edit-usr-email" required>
+            </div>
+            <div class="form-group">
+              <label for="edit-usr-password" class="required">Password</label>
+              <input type="password" id="edit-usr-password" required>
+            </div>
+            <div class="form-group">
+              <label for="edit-usr-role" class="required">Role</label>
+              <select id="edit-usr-role" required>
+                <option value="Admin">Admin</option>
+                <option value="Doctor">Doctor</option>
+                <option value="Nurse">Nurse</option>
+                <option value="Receptionist">Receptionist</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-actions border-top" style="margin-top: 24px;">
+            <button type="button" class="btn btn-outline" id="btn-cancel-edit-user">Cancel</button>
+            <button type="submit" class="btn btn-primary">Save Changes</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Update Doctor Fee Modal -->
+  <div class="modal-backdrop" id="update-fee-modal">
+    <div class="modal-container" style="max-width: 500px;">
+      <div class="modal-header">
+        <div class="modal-title">
+          <i data-lucide="dollar-sign" class="modal-icon p-teal" style="color: #14b8a6;"></i>
+          <div>
+            <h3>Update Consultation Fee</h3>
+            <p>Modify consultation fee for the doctor</p>
+          </div>
+        </div>
+        <button class="modal-close" id="btn-close-update-fee">
+          <i data-lucide="x"></i>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form id="update-fee-form" novalidate>
+          <input type="hidden" id="update-fee-doc-id">
+          <div class="form-grid" style="grid-template-columns: 1fr;">
+            <div class="form-group">
+              <label for="update-fee-doc-name">Doctor Name</label>
+              <input type="text" id="update-fee-doc-name" readonly style="background-color: rgba(255, 255, 255, 0.05); cursor: not-allowed;">
+            </div>
+            <div class="form-group">
+              <label for="update-fee-doc-spec">Specialization</label>
+              <input type="text" id="update-fee-doc-spec" readonly style="background-color: rgba(255, 255, 255, 0.05); cursor: not-allowed;">
+            </div>
+            <div class="form-group">
+              <label for="update-fee-doc-current">Current Fee (₹)</label>
+              <input type="text" id="update-fee-doc-current" readonly style="background-color: rgba(255, 255, 255, 0.05); cursor: not-allowed;">
+            </div>
+            <div class="form-group">
+              <label for="update-fee-doc-new" class="required">New Consultation Fee (₹)</label>
+              <input type="number" id="update-fee-doc-new" min="1" placeholder="e.g. 2000" required>
+              <span class="field-error" id="update-fee-doc-new-error">Fee must be a numeric value greater than 0</span>
+            </div>
+          </div>
+          <div class="form-actions border-top" style="margin-top: 24px;">
+            <button type="button" class="btn btn-outline" id="btn-cancel-update-fee">Cancel</button>
+            <button type="submit" class="btn btn-primary">Save Fee</button>
+          </div>
+        </form>
+      </div>
     </div>
   </div>
 
